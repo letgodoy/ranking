@@ -1,0 +1,13 @@
+$primary: #6550A1;
+$secondary: #ff4136;
+$shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.1),
+0 2px 49px 0 rgba(0, 0, 0, 0.06);
+$secondary-transp: #ff4136aa;
+
+$react-rater-link: #6666; // color of star not rated
+$react-rater-hover: $secondary; // color of star on hover
+$react-rater-active: $secondary-transp; // color of star rated
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/bootstrap/scss/_variables.scss";
+@import "../../node_modules/react-rater/lib/react-rater.scss";
