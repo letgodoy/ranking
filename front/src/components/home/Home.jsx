@@ -3,7 +3,7 @@ import Main from '../template/Main'
 import Card from '../template/Card'
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:3001/pageRate'
+const baseUrl = '../../../db.json'
 
 export default class Home extends React.Component {
 

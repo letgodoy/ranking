@@ -6,7 +6,7 @@ import './Pagerate.scss'
 import Profile from '../../assets/imgs/invis-user.png'
 import { Link } from 'react-router-dom'
 
-const baseUrl = 'http://localhost:3001/pageRate'
+const baseUrl = '../../../db.json'
 const rate = []
 const initialState = {
     user: {
