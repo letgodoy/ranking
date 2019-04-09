@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/ranking/precache-manifest.536eed58389ffb96132726692d69ea38.js"
+  "/rankingnpm%20run%20deploy/precache-manifest.f2e0353f712ab8d98a7e79e06ac920a4.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/ranking/index.html", {
+workbox.routing.registerNavigationRoute("/rankingnpm%20run%20deploy/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
