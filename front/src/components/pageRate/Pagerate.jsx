@@ -6,7 +6,7 @@ import './Pagerate.scss'
 import Profile from '../../assets/imgs/invis-user.png'
 import { Link } from 'react-router-dom'
 
-const baseUrl = 'https://api.myjson.com/bins/oom3o'
+const baseUrl = 'https://api.jsonbin.io/b/5cabe9d2061b5b137a612da6'
 const rate = []
 const initialState = {
     user: {
