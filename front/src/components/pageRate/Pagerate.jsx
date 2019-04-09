@@ -6,72 +6,118 @@ import './Pagerate.scss'
 import Profile from '../../assets/imgs/invis-user.png'
 import { Link } from 'react-router-dom'
 
-const baseUrl = 'https://api.jsonbin.io/b/5cabe9d2061b5b137a612da6'
+const baseUrl = 'https://api.myjson.com/bins/mulk4'
 const rate = []
-const initialState = {
-    user: {
-        name: '',
-        city: '',
-        hab: [],
-        rategeral: [],
-        id: '',
-    },
-    rate: [],
-}
-
-
+const user = {}
 
 export default class Pagerate extends Component {
 
-    state = { ...initialState }
+    constructor(props) {
+        super(props)
+        this.state = {
+            users: {
+                name: '',
+                city: '',
+                hab: [],
+                rategeral: [],
+                id: '',
+            },
+            user: {
+                name: '',
+                city: '',
+                hab: [],
+                rategeral: [],
+                id: '',
+            },
+            rate: [],
+        }
+    }
+
+
 
     componentWillMount() {
         const userId = parseInt(this.props.location.state.foo)
         console.log(userId)
 
-        axios.get(`${baseUrl}/${userId}`)
-            .then(({ data: user }) => {
-                console.log('user', user);
+        axios.get(`${baseUrl}`)
+            .then(({ data: users }) => {
+                console.log('user', users);
 
-                this.setState({ user });
+                this.setState({ users });
+
+                users.map(u => {
+                    if (u.id === userId) {
+                        this.setState({ user: u })
+                        return user
+                    }
+                    else {
+                        return u
+                    }
+                })
+
+                // console.log(user)
+                // console.log(users)
+
+                // this.setState({ user });
             })
-
     }
 
     save() {
         this.media()
-
+        const userId = parseInt(this.props.location.state.foo)
         const user = this.state.user
-        const url = `${baseUrl}/${user.id}`
-        axios.put(url, user)
+        const users = this.state.users
+        const url = `${baseUrl}`
+
+        // console.log(user)
+        // console.log(users)
+
+        users.map(u => {
+            if (u.id === userId) {
+                this.setState({ u: user })
+                // console.log(u)
+                return u
+            }
+            else {
+                // console.log(u)
+                return u
+            }
+        })
+
+        // console.log(users)
+
+        axios.put(url, users)
             .then(resp => {
-                this.setState({ user })
-            })
-            this.props.history.push("/");
+                this.setState({ users })
+            }).then(resp => {
+                this.props.history.push("/");
+            }
+            )
+        
     }
 
-    media(){
+    media() {
         const user = { ...this.state.user }
         const total = parseInt(rate.length)
-        
+
         const soma = parseInt(rate.reduce((a, b) => a + b))
 
-        const media = parseInt( soma/total )
+        const media = parseInt(soma / total)
 
         user.rategeral.push(media)
 
-        this.setState ({ user })
+        this.setState({ user })
     }
 
     habilidades(hab, id) {
         return (
-                <h3 className="text-center" key={hab}><span className="badge badge-primary mr-3 p-2">{hab}</span>
-                    <Rater total={5} onRate={( rating ) => {
-                        rate[`${id}`] = parseInt(rating.rating)
-                        console.log( rate )
-                    }
-                 } />
-                </h3>
+            <h3 className="text-center" key={hab}><span className="badge badge-primary mr-3 p-2">{hab}</span>
+                <Rater total={5} onRate={(rating) => {
+                    rate[`${id}`] = parseInt(rating.rating)
+                    console.log(rate)
+                }
+                } />
+            </h3>
         )
     }
 
@@ -80,11 +126,10 @@ export default class Pagerate extends Component {
         const rating = this.state.user.rategeral
         let stars = 0
 
-        if (rating.length >0) {
+        if (rating.length > 0) {
             stars = rating.reduce((sum, num) => sum + num) / rating.length
-        } 
+        }
 
-        console.log(rating)
         return (
             <Main>
                 <div className="col col-12 justify-content-center">

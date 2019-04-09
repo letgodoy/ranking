@@ -3,7 +3,6 @@ import './Card.scss'
 import { Link } from 'react-router-dom'
 import Profile from '../../assets/imgs/invis-user.png'
 import Rater from 'react-rater'
-// import Pagerate from '../pageRate/Pagerate'
 
 class Card extends React.Component {
 
@@ -15,7 +14,7 @@ class Card extends React.Component {
                 name: '',
                 city: '',
                 hab: [],
-                rategeral: [],
+                rategeral: [0],
                 id: '',
             },
 
@@ -26,6 +25,18 @@ class Card extends React.Component {
         return (
             <span className="badge badge-primary m-1 p-2" key={hab}>{hab}</span>
         )
+    }
+
+    stars() {
+
+        const rating = this.props.rategeral
+
+        if (rating.length > 0) {
+            return rating.reduce((sum, num) => sum + num) / rating.length
+        } else {
+            return this.stars
+        }
+
     }
 
     render() {
@@ -44,28 +55,22 @@ class Card extends React.Component {
 
         const habi = this.props.hab
         const rating = this.props.rategeral
-        let stars = 0
-
-        if (rating.length >0) {
-            stars = rating.reduce((sum, num) => sum + num) / rating.length
-        } 
-
 
         return (
-                <div className="card cardp col col-8 col-sm-8 col-md-6 col-lg-4 col-xl-3 justify-content-center" >
-                    <img src={Profile} alt={this.props.nome} className="card-img-top" />
-                    <div className="card-body text-center mt-0">
-                        <h5 className="card-title text-secondary mt-0 pt-0">{this.props.nome}</h5>
-                        <p className="card-text"><small>{this.props.city}</small></p>
-                        <br />
-                        {habi.map(this.habilidades)}
-                        <br />
-                        <p className="mt-4 text-secondary mb-0">Avaliação</p>
-                        <h3 className="text-secondary animated-rater p-0 m-0"><Rater interactive={false} rating={stars} total={5} /></h3>
-                        <br />
-                        {buttonLink}
-                    </div>
+            <div className="card cardp col col-8 col-sm-8 col-md-6 col-lg-4 col-xl-3 justify-content-center" >
+                <img src={Profile} alt={this.props.nome} className="card-img-top" />
+                <div className="card-body text-center mt-0">
+                    <h5 className="card-title text-secondary mt-0 pt-0">{this.props.nome}</h5>
+                    <p className="card-text"><small>{this.props.city}</small></p>
+                    <br />
+                    {habi ? habi.map(this.habilidades) : ''}
+                    <br />
+                    <p className="mt-4 text-secondary mb-0">Avaliação</p>
+                    <h3 className="text-secondary animated-rater p-0 m-0"><Rater interactive={false} rating={rating ? rating.reduce((sum, num) => sum + num) / rating.length : 0} total={5} /></h3>
+                    <br />
+                    {buttonLink}
                 </div>
+            </div>
         )
     }
 }
