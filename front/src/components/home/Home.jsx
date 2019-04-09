@@ -3,7 +3,7 @@ import Main from '../template/Main'
 import Card from '../template/Card'
 import axios from 'axios'
 
-const baseUrl = '../../../db.json'
+const baseUrl = 'https://api.myjson.com/bins/oom3o'
 
 export default class Home extends React.Component {
 
